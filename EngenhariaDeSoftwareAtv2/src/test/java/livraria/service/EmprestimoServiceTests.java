@@ -26,12 +26,6 @@ public class EmprestimoServiceTests {
         .build();
 
 
-    private Usuario usuario02 = Usuario.builder()
-        .nome("Teresa")
-        .matricula("88894")
-        .emprestimos(new ArrayList<>())
-        .build();
-
     private Livro livro01 = Livro.builder()
         .titulo("Garota de texas")
         .autor("Jorge Smitch")
@@ -49,26 +43,14 @@ public class EmprestimoServiceTests {
         .build();
 
     private Livro livro03 = Livro.builder()
-        .titulo("Casa verde ")
-        .autor("Jorge Aragao")
-        .isEmprestado(true)
-        .isReservado(false)
-        .historico(new ArrayList<>())
-        .build();
-
-    private Livro livro04 = Livro.builder()
-        .autor("Pedrinho")
-        .titulo("BBBB")
+        .autor("Paulo Ferreira")
+        .titulo("Bom tempo")
         .isEmprestado(false)
         .isReservado(false)
         .historico(new ArrayList<>())
         .build();
 
 
-//    @Test
-//    public void deveRealizarEmprestimoCasoOLivroNaoEstejaReservado() {
-//        assertDoesNotThrow(() -> emprestimoService.emprestarPara(usuario01, livro01));
-//    }
 
     @Test
     public void naoDeveFazerEmprestimoParaUmLivroQuePossuiUmaReserva() {
@@ -109,7 +91,7 @@ public class EmprestimoServiceTests {
     @Test
     public void usuariodeveTerDoisEmprestimos() {
         emprestimoService.emprestarPara(usuario01, livro01);
-        emprestimoService.emprestarPara(usuario01, livro04);
+        emprestimoService.emprestarPara(usuario01, livro03);
 
         List<Emprestimo> emprestimos = emprestimoService
             .consultarEmprestimosPorUsuario(usuario01);
@@ -120,7 +102,7 @@ public class EmprestimoServiceTests {
     @Test
     public void naoDeveRealizarOTerceiroEmprestimoParaOMesmoUsuario() {
         emprestimoService.emprestarPara(usuario01, livro01);
-        emprestimoService.emprestarPara(usuario01, livro04);
+        emprestimoService.emprestarPara(usuario01, livro03);
 
         assertThrows(EmprestimoValidationException.class,
             () -> emprestimoService.emprestarPara(
@@ -128,8 +110,6 @@ public class EmprestimoServiceTests {
                 Livro.builder().historico(new ArrayList<>()).build()
             ));
     }
-
-    // ---------- Testes Para acao de devolver de emprestimo ------------
 
     @Test
     public void naoDeveAplicarMultaAntesDaDataPrevista() {
