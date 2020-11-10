@@ -1,19 +1,18 @@
 package livraria.service.interfaces;
 
-import com.jr.livraria.models.Emprestimo;
-import com.jr.livraria.models.Livro;
-import com.jr.livraria.models.Usuario;
+import livraria.model.Emprestimo;
+import livraria.model.Livro;
+import livraria.model.Usuario;
 
 import java.util.List;
 
-public interface IUsuarioService {
+public interface UsuarioService {
 
-    void adicionarEmprestimo(Emprestimo emprestimo);
+  void adicionarEmprestimo(Emprestimo emprestimo);
 
-    List<Emprestimo> consultarEmprestimos(Usuario usuario);
+  List<Emprestimo> consultarEmprestimos(Usuario usuario);
 
-    Long quantidadeDeEmprestimoDe(Usuario usuario);
+  Long quantidadeDeEmprestimoDe(Usuario usuario);
 
-    Emprestimo buscaEmprestimoPara(Usuario usuario, Livro livro);
-
+  Emprestimo buscaEmprestimoPara(Usuario usuario, Livro livro);
 }

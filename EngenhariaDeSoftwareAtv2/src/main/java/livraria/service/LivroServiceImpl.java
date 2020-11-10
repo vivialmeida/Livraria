@@ -1,28 +1,34 @@
 package livraria.service;
 
-import com.jr.livraria.models.Emprestimo;
-import com.jr.livraria.models.Livro;
-import com.jr.livraria.services.exceptions.ObjectNotFoundException;
-import com.jr.livraria.services.interfaces.ILivroService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import livraria.model.Emprestimo;
+import livraria.model.Livro;
+import livraria.model.Usuario;
+import livraria.service.exceptions.ObjectNotFoundException;
+import livraria.service.interfaces.LivroService;
 
-@Slf4j
-@Service
-public class LivroService implements ILivroService {
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
-    public void adicionarEmprestimo(Emprestimo emprestimo) {
+public class LivroServiceImpl implements LivroService {
 
-        if (emprestimo == null)
-            throw new ObjectNotFoundException("Informe um empréstimo!");
+  @Override
+  public void adicionarEmprestimo(Emprestimo emprestimo) {
 
-        Livro livro = emprestimo.getLivro();
+      if (emprestimo == null)
+        throw new ObjectNotFoundException("Informe um empréstimo!");
 
-        if (livro == null)
-            throw new ObjectNotFoundException("Emprestimo sem um livro associado!");
+      Livro livro = emprestimo.getLivro();
 
-        livro.setReservado(false);
-        livro.setEmprestado(true);
-        livro.adicionarEmprestimoAoHistorico(emprestimo);
+      if (livro == null)
+        throw new ObjectNotFoundException("Emprestimo sem um livro associado!");
+
+      livro.setReservado(false);
+      livro.setEmprestado(true);
+      livro.adicionarEmprestimoAoHistorico(emprestimo);
     }
+
+
+
 }

@@ -1,17 +1,17 @@
 package livraria.service.interfaces;
 
-import com.jr.livraria.models.Emprestimo;
-import com.jr.livraria.models.Livro;
-import com.jr.livraria.models.Usuario;
+import livraria.model.Emprestimo;
+import livraria.model.Livro;
+import livraria.model.Usuario;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public interface IEmprestimoService {
+public interface EmprestimoService {
 
-    Emprestimo emprestarPara(Usuario usuario, Livro livro);
+  Emprestimo emprestarPara(Usuario usuario, Livro livro);
 
-    List<Emprestimo> consultarEmprestimosPorUsuario(Usuario usuario);
+  List<Emprestimo> consultarEmprestimosPorUsuario(Usuario usuario);
 
-    Emprestimo devolverPara(Usuario usuario, Livro livro, LocalDate dataDeDevolucao);
+  Emprestimo devolverPara(Usuario usuario, Livro livro, LocalDate dataDeDevolucao);
 }
